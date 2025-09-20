@@ -104,13 +104,11 @@ Delete Task → DELETE /tasks/:id?force=true
 <details>
 <summary>🔗 Dependency Endpoints</summary>
 
-Add Dependency → POST /tasks/:id/dependencies
-
-{ "depends_on_task_id": 7 }
-
+- **Add Dependency** → `POST /tasks/:id/dependencies`  
+  ```json
+	{ "depends_on_task_id": 7 }
 
 Rules:
-
 No self-dependency
 
 No circular chains
@@ -122,30 +120,32 @@ Get Dependencies → GET /tasks/:id/dependencies
 Get Blocking Tasks → GET /tasks/:id/blocking
 
 </details>
-4️⃣ Analytics
+
+### 4️⃣ Analytics
 <details>
 <summary>📊 Analytics Endpoints</summary>
 
-Project Progress → GET /projects/:id/progress
+- **Project Progress** → `GET /projects/:id/progress`  
+  ```json
+  	{
+  		"percent": 50,
+  		"total": 10,
+  		"done": 5,
+  		"blocked": [
+    	{ "task": { ... }, "blockedBy": [ { ... } ] }
+  			]
+	}
 
-{
-  "percent": 50,
-  "total": 10,
-  "done": 5,
-  "blocked": [
-    { "task": { ... }, "blockedBy": [ { ... } ] }
-  ]
-}
 
 
-Critical Path → GET /projects/:id/critical-path
-
-{
-  "chain": [
-    { "id": 1, "title": "Task A" },
-    { "id": 2, "title": "Task B" }
-  ]
-}
+- **Critical Path** → `GET /projects/:id/critical-path`  
+  ```json
+	{
+  		"chain": [
+  			{ "id": 1, "title": "Task A" },
+    		{ "id": 2, "title": "Task B" }
+  			]
+	}
 
 </details>
 
