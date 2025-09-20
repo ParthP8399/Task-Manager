@@ -1,17 +1,6 @@
 # 📌 Task Manager with Dependencies
 
 A project management system where tasks can have dependencies on other tasks, preventing completion until all dependencies are resolved.  
-Includes Kanban board UI + dependency graph.
-
----
-
-## ⚡ Features
-- Manage Projects & Tasks
-- Task Dependencies (blocked / blocking relationships)
-- Validation (no circular dependencies, enforce task flow)
-- Analytics: Project Progress & Critical Path
-- SQLite3 persistence
-- Express.js REST API
 
 ---
 
