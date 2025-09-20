@@ -1,0 +1,66 @@
+
+<!-- public/index.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Task Manager Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Task Manager (Dependencies Demo)</h1>
+
+    <!-- Top Controls -->
+    <div id="controls">
+      <button id="newProjectBtn">New Project</button>
+      <select id="projectSelect"></select>
+      <button id="refreshBtn">Refresh</button>
+    </div>
+
+    <!-- Task Creation Form -->
+    <div id="topbar">
+      <form id="taskForm">
+        <input name="title" placeholder="Task title" required />
+        <input name="estimated_hours" placeholder="Est hrs" type="number" />
+        <select name="depends_on" id="depends_on">
+          <option value="">-- depends on --</option>
+        </select>
+
+        <input type="hidden" name="status" value="todo" />
+
+        <button type="submit">Create Task</button>
+      </form>
+
+      <div id="progress"></div>
+      <div id="blocked"></div>
+    </div>
+
+    <!-- Kanban Board -->
+    <div class="kanban-board">
+      <div class="kanban-column column-todo" data-status="todo">
+        <h2>To Do</h2>
+        <div class="list" id="todo"></div>
+      </div>
+      <div class="kanban-column column-inprogress" data-status="in-progress">
+        <h2>In Progress</h2>
+        <div class="list" id="in-progress"></div>
+      </div>
+      <div class="kanban-column column-done" data-status="done">
+        <h2>Done</h2>
+        <div class="list" id="done"></div>
+      </div>
+      
+    </div>
+
+    <!-- Dependency Graph -->
+    <div class="dependency-graph">
+      <h3>Dependency Graph</h3>
+      <div id="depGraph"></div>
+    </div>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
