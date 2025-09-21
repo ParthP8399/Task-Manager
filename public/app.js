@@ -165,7 +165,7 @@ const api = (path, opts={}) =>
        if (newStatus === 'in-progress') {
          const blockedDeps = (detail.dependencies || []).filter(d => !isDone(d.status));
          if (blockedDeps.length > 0) {
-           alert('Cannot move to In Progress â€” blocked by: ' + blockedDeps.map(d => `${d.title}`).join(', '));
+           alert('Cannot move to In Progress ” blocked by: ' + blockedDeps.map(d => `${d.title}`).join(', '));
            return;
          }
        }
