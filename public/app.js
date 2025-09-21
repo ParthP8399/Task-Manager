@@ -88,7 +88,7 @@ const api = (path, opts={}) =>
          <p>Status: ${detail.task.status}</p>
          <h4>Dependencies:</h4>
          <ul id="depList">
-           ${deps.map(d => `<li data-depid="${d.id}">#${d.depends_on_task_id} ${d.title} <button class="remove-dep">âŒ</button></li>`).join('')}
+           ${deps.map(d => `<li data-depid="${d.id}">#${d.depends_on_task_id} ${d.title} <button class="remove-dep">remove-dependency</button></li>`).join('')}
          </ul>
          <select id="addDepSelect"><option value="">-- add dependency --</option></select>
          <button id="addDepBtn">Add Dependency</button>
