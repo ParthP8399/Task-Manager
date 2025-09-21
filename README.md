@@ -342,5 +342,7 @@ http://localhost:4000/api
 
 
 # 📖 Architecture
+![High-Level Design (HLD) Diagram](https://github.com/ParthP8399/Task-Manager/blob/main/images/arch_diagram.png)
+
 
 
