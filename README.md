@@ -14,7 +14,7 @@ A project management system where tasks can have dependencies on other tasks, pr
 ### Steps
 1. Clone the repo:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/ParthP8399/Task-Manager.git
    cd task-manager
 
 2. Install dependencies:
@@ -161,7 +161,7 @@ http://localhost:4000/api
 
 - **Get Task** → GET /tasks/:id
 - Response:
-	``json
+	```json
 	{
   	"task": {
   	"id": 1,
