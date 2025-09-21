@@ -369,7 +369,7 @@ http://localhost:4000/api
 	- If a path is found, the request is rejected with a 400 Bad Request error, preventing the cycle.
 
 2. **State Transition Validation**
-	- Task status changes (PUT /api/tasks/:id/status) are not simple updates; they are state transitions governed by strict business rules.
+	- Task status changes (PUT /api/tasks/:id/status); they are state transitions governed by some rules.
 	- Validation Rules: The backend enforces a state machine to ensure logical progression:
 	- To in-progress:
 		- Prerequisite: All of the task's dependencies must have a done status.
@@ -398,5 +398,6 @@ http://localhost:4000/api
 	- Used AI tools to assist with frontend implementation (UI structure and styling suggestions).
  	- Leveraged AI for debugging support and resolving  errors.
   	- Referred to AI for syntax corrections and code snippets to speed up development.
+   	- Formatting Documentation 
 
 
