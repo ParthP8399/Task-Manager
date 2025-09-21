@@ -394,5 +394,9 @@ http://localhost:4000/api
 	- Force Flag: If dependents are found, the deletion is aborted unless the ?force=true query parameter is provided. This explicit "force" flag requires the client to acknowledge the potentially breaking 							change.
 	- Cascading Deletes: When a task is deleted (forced or not), all its associated dependency records are also removed to maintain referential integrity
 
+#  AI Usage Details
+	- Used AI tools to assist with frontend implementation (UI structure and styling suggestions).
+ 	- Leveraged AI for debugging support and resolving  errors.
+  	- Referred to AI for syntax corrections and code snippets to speed up development.
 
 
