@@ -386,7 +386,7 @@ http://localhost:4000/api
 
 3. **Critical Path Analysis**
 	- The GET /api/projects/:id/critical-path endpoint calculates the longest path of dependent tasks within a project, which determines the project's minimum possible completion time.
-	- Algorithm Used: Depth-First Search (DFS) with Memoization
+	- Algorithm Used: Depth-First Search (DFS) 
 
 4. **Safe Deletion Handling**
 	- The DELETE /api/tasks/:id endpoint implements a confirmation mechanism for tasks that have dependents.
