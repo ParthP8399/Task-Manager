@@ -342,5 +342,57 @@ http://localhost:4000/api
 
 
 # 📖 Architecture
+![High-Level Design (HLD) Diagram](https://github.com/ParthP8399/Task-Manager/blob/main/images/arch_diagram.png)
+- Architecture Notes:
+1. **Dependency Management & Cycle Prevention**
+	- Dependencies are modeled as a directed graph using a junction table.
+		```sql
+		CREATE TABLE task_dependencies (
+    	id INTEGER PRIMARY KEY AUTOINCREMENT,
+   	 	task_id INTEGER,                -- The task that has a dependency
+    	depends_on_task_id INTEGER,     -- The task it depends on
+    	FOREIGN KEY (task_id) REFERENCES tasks(id),
+    	FOREIGN KEY (depends_on_task_id) REFERENCES tasks(id),
+    	UNIQUE (task_id, depends_on_task_id) -- Prevents duplicate links
+		);
+	- This structure allows a task to have multiple dependencies (e.g., Task C depends on Task A and Task B).
+
+	- Cycle Detection Algorithm: Before adding a new dependency (POST /api/tasks/:id/dependencies), the backend checks if it would create a circular dependency (e.g., A → B → A). This is critical to prevent 				deadlocks where tasks can never be completed.
+	- Algorithm Used: Depth-First Search (DFS)
+
+	- Implementation: The createsCycle(task_id, depends_on_task_id) function:
+
+	- Builds an adjacency list representation of the entire current dependency graph.
+
+	- Initiates a DFS starting from the proposed new dependency (depends_on_task_id).
+	- Searches for a path back to the original task (task_id).
+	- If a path is found, the request is rejected with a 400 Bad Request error, preventing the cycle.
+
+2. **State Transition Validation**
+	- Task status changes (PUT /api/tasks/:id/status) are not simple updates; they are state transitions governed by strict business rules.
+	- Validation Rules: The backend enforces a state machine to ensure logical progression:
+	- To in-progress:
+		- Prerequisite: All of the task's dependencies must have a done status.
+		- Logic: The API queries all dependencies and filters for incomplete ones. If any are found, the transition is blocked, and the list of blocking tasks is returned to the client.
+
+	- To done:
+		- Prerequisite 1: The task must currently be in the in-progress state. This prevents jumping directly from todo to done.
+		- Prerequisite 2: (Redundant safety check) All dependencies must be done.
+
+	- Logic: This two-step rule ensures tasks are worked on and provides a final check before completion.
+
+	- Normalization:
+		- The normalizeStatus(s) helper function ensures robust comparisons by converting various user inputs ('completed', 'Complete', 'in progress') into three canonical states: todo, in-progress, done.
+
+3. **Critical Path Analysis**
+	- The GET /api/projects/:id/critical-path endpoint calculates the longest path of dependent tasks within a project, which determines the project's minimum possible completion time.
+	- Algorithm Used: Depth-First Search (DFS) with Memoization
+
+4. **Safe Deletion Handling**
+	- The DELETE /api/tasks/:id endpoint implements a confirmation mechanism for tasks that have dependents.
+	- Check: Before deletion, it queries for any other tasks that depend on the task-to-be-deleted.
+	- Force Flag: If dependents are found, the deletion is aborted unless the ?force=true query parameter is provided. This explicit "force" flag requires the client to acknowledge the potentially breaking 							change.
+	- Cascading Deletes: When a task is deleted (forced or not), all its associated dependency records are also removed to maintain referential integrity
+
 
 
